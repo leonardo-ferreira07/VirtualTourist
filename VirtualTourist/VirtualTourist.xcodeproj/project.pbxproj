@@ -14,6 +14,7 @@
 		A73D8CDD1FA1F29800ADE124 /* VirtualTouristTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8CDC1FA1F29800ADE124 /* VirtualTouristTests.swift */; };
 		A73D8CE81FA1F29800ADE124 /* VirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8CE71FA1F29800ADE124 /* VirtualTouristUITests.swift */; };
 		A73D8CF81FA1F2F600ADE124 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8CF71FA1F2F600ADE124 /* MapViewController.swift */; };
+		A73D8CFB1FA1F7BD00ADE124 /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8CFA1FA1F7BD00ADE124 /* MapHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		A73D8CE71FA1F29800ADE124 /* VirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTouristUITests.swift; sourceTree = "<group>"; };
 		A73D8CE91FA1F29800ADE124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A73D8CF71FA1F2F600ADE124 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A73D8CFA1FA1F7BD00ADE124 /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		A73D8CC61FA1F29800ADE124 /* VirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
+				A73D8CF91FA1F7B000ADE124 /* Helpers */,
 				A73D8CF51FA1F2E200ADE124 /* Controllers */,
 				A73D8CC71FA1F29800ADE124 /* AppDelegate.swift */,
 				A73D8CCB1FA1F29800ADE124 /* Main.storyboard */,
@@ -139,6 +142,14 @@
 				A73D8CF71FA1F2F600ADE124 /* MapViewController.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		A73D8CF91FA1F7B000ADE124 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A73D8CFA1FA1F7BD00ADE124 /* MapHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +288,7 @@
 			files = (
 				A73D8CF81FA1F2F600ADE124 /* MapViewController.swift in Sources */,
 				A73D8CC81FA1F29800ADE124 /* AppDelegate.swift in Sources */,
+				A73D8CFB1FA1F7BD00ADE124 /* MapHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
