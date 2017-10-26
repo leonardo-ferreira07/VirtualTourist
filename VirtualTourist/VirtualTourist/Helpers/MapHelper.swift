@@ -10,45 +10,53 @@ import Foundation
 
 struct MapHelper {
     
-    static private let defaultVal = -500.0
-    
     static var latitude: Double {
         get {
-            return UserDefaults.standard.object(forKey: "latitude") as? Double ?? defaultVal
+            return UserDefaults.standard.double(forKey: "latitude")
         }
         
         set {
-            UserDefaults.standard.set(latitude, forKey: "latitude")
+            UserDefaults.standard.set(newValue, forKey: "latitude")
         }
     }
     
     static var longitude: Double {
         get {
-            return UserDefaults.standard.object(forKey: "longitude") as? Double ?? defaultVal
+            return UserDefaults.standard.double(forKey: "longitude")
         }
         
         set {
-            UserDefaults.standard.set(longitude, forKey: "longitude")
+            UserDefaults.standard.set(newValue, forKey: "longitude")
         }
     }
     
     static var latitudeDelta: Double {
         get {
-            return UserDefaults.standard.object(forKey: "latitudeDelta") as? Double ?? defaultVal
+            return UserDefaults.standard.double(forKey: "latitudeDelta")
         }
         
         set {
-            UserDefaults.standard.set(latitudeDelta, forKey: "latitudeDelta")
+            UserDefaults.standard.set(newValue, forKey: "latitudeDelta")
         }
     }
     
     static var longitudeDelta: Double {
         get {
-            return UserDefaults.standard.object(forKey: "longitudeDelta") as? Double ?? defaultVal
+            return UserDefaults.standard.double(forKey: "longitudeDelta")
         }
         
         set {
-            UserDefaults.standard.set(longitudeDelta, forKey: "longitudeDelta")
+            UserDefaults.standard.set(newValue, forKey: "longitudeDelta")
+        }
+    }
+    
+    static var didGetFirstCoodinates: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "didGetFirstCoodinates")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "didGetFirstCoodinates")
         }
     }
 }
