@@ -10,9 +10,11 @@ import Foundation
 
 struct MapHelper {
     
+    static private let defaultVal = -500.0
+    
     static var latitude: Double {
         get {
-            return UserDefaults.standard.object(forKey: "latitude") as? Double ?? -500.0
+            return UserDefaults.standard.object(forKey: "latitude") as? Double ?? defaultVal
         }
         
         set {
@@ -22,7 +24,7 @@ struct MapHelper {
     
     static var longitude: Double {
         get {
-            return UserDefaults.standard.object(forKey: "longitude") as? Double ?? -500.0
+            return UserDefaults.standard.object(forKey: "longitude") as? Double ?? defaultVal
         }
         
         set {
@@ -32,7 +34,7 @@ struct MapHelper {
     
     static var latitudeDelta: Double {
         get {
-            return UserDefaults.standard.object(forKey: "latitudeDelta") as? Double ?? -500.0
+            return UserDefaults.standard.object(forKey: "latitudeDelta") as? Double ?? defaultVal
         }
         
         set {
@@ -42,7 +44,7 @@ struct MapHelper {
     
     static var longitudeDelta: Double {
         get {
-            return UserDefaults.standard.object(forKey: "longitudeDelta") as? Double ?? -500.0
+            return UserDefaults.standard.object(forKey: "longitudeDelta") as? Double ?? defaultVal
         }
         
         set {
