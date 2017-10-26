@@ -17,15 +17,18 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    var canAddPin: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        addGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        print(MapHelper.latitude)
         if MapHelper.latitude > -500.0 {
             let span: MKCoordinateSpan = MKCoordinateSpanMake(MapHelper.latitudeDelta, MapHelper.longitudeDelta)
             let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(MapHelper.latitude, MapHelper.longitude)
@@ -69,10 +72,41 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let newRegion = self.mapView.region
-        MapHelper.latitude = newRegion.center.latitude
-        MapHelper.latitude = newRegion.center.longitude
-        MapHelper.latitude = newRegion.span.latitudeDelta
-        MapHelper.latitude = newRegion.span.longitudeDelta
+        print(Double(newRegion.center.latitude))
+        MapHelper.latitude = Double(newRegion.center.latitude)
+        MapHelper.longitude = newRegion.center.longitude
+        MapHelper.latitudeDelta = newRegion.span.latitudeDelta
+        MapHelper.longitudeDelta = newRegion.span.longitudeDelta
+    }
+    
+}
+
+// MARK: - UIGesture Recognizer
+
+extension MapViewController {
+    
+    func addGesture() {
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(triggerLongpressOn(_:)))
+        mapView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func triggerLongpressOn(_ gestureRecognizer: UIGestureRecognizer) {
+        
+        if canAddPin {
+            let touchPoint = gestureRecognizer.location(in: mapView)
+            let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = newCoordinates
+            annotation.title = "\(newCoordinates.latitude) \(newCoordinates.longitude)"
+            mapView.addAnnotation(annotation)
+        }
+        
+        if gestureRecognizer.state == UIGestureRecognizerState.began {
+            canAddPin = false
+        } else if gestureRecognizer.state == UIGestureRecognizerState.ended {
+            canAddPin = true
+        }
+        
     }
     
 }
