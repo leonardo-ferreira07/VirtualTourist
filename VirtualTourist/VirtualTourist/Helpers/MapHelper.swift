@@ -12,7 +12,7 @@ struct MapHelper {
     
     static var latitude: Double {
         get {
-            return UserDefaults.standard.double(forKey: "latitude")
+            return UserDefaults.standard.object(forKey: "latitude") as? Double ?? -500.0
         }
         
         set {
@@ -22,7 +22,7 @@ struct MapHelper {
     
     static var longitude: Double {
         get {
-            return UserDefaults.standard.double(forKey: "longitude")
+            return UserDefaults.standard.object(forKey: "longitude") as? Double ?? -500.0
         }
         
         set {
@@ -32,7 +32,7 @@ struct MapHelper {
     
     static var latitudeDelta: Double {
         get {
-            return UserDefaults.standard.double(forKey: "latitudeDelta")
+            return UserDefaults.standard.object(forKey: "latitudeDelta") as? Double ?? -500.0
         }
         
         set {
@@ -42,7 +42,7 @@ struct MapHelper {
     
     static var longitudeDelta: Double {
         get {
-            return UserDefaults.standard.double(forKey: "longitudeDelta")
+            return UserDefaults.standard.object(forKey: "longitudeDelta") as? Double ?? -500.0
         }
         
         set {

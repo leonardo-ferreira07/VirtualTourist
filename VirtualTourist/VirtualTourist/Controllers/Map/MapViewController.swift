@@ -26,10 +26,12 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let span: MKCoordinateSpan = MKCoordinateSpanMake(MapHelper.latitudeDelta, MapHelper.longitudeDelta)
-        let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(MapHelper.latitude, MapHelper.longitude)
-        let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
-        self.mapView.setRegion(region, animated: true)
+        if MapHelper.latitude > -500.0 {
+            let span: MKCoordinateSpan = MKCoordinateSpanMake(MapHelper.latitudeDelta, MapHelper.longitudeDelta)
+            let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(MapHelper.latitude, MapHelper.longitude)
+            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+            self.mapView.setRegion(region, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,7 +69,6 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let newRegion = self.mapView.region
-        
         MapHelper.latitude = newRegion.center.latitude
         MapHelper.latitude = newRegion.center.longitude
         MapHelper.latitude = newRegion.span.latitudeDelta
