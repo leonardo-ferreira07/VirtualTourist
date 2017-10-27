@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  VirtualTourist
 //
-//  Created by Leonardo Vinicius Kaminski Ferreira on 26/10/17.
+//  Created by Leonardo Vinicius Kaminski Ferreira on 27/10/17.
 //  Copyright © 2017 Leonardo Vinicius Kaminski Ferreira. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@ extension Photo {
     }
 
     @NSManaged public var imageData: NSData?
+    @NSManaged public var url: String?
     @NSManaged public var locationPin: LocationPin?
 
 }

@@ -65,13 +65,65 @@
                     <view key="view" contentMode="scaleToFill" id="wpL-9n-vBr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fug-OL-lTj">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="l8u-og-Tbx">
+                                    <size key="itemSize" width="375" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="nn3-wI-RKX" customClass="PhotoCollectionViewCell" customModule="VirtualTourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oss-YH-ucc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="oss-YH-ucc" secondAttribute="bottom" id="7Df-x6-PkI"/>
+                                            <constraint firstItem="oss-YH-ucc" firstAttribute="top" secondItem="nn3-wI-RKX" secondAttribute="top" id="NU4-UO-CaG"/>
+                                            <constraint firstAttribute="trailing" secondItem="oss-YH-ucc" secondAttribute="trailing" id="ZeB-er-2bB"/>
+                                            <constraint firstItem="oss-YH-ucc" firstAttribute="leading" secondItem="nn3-wI-RKX" secondAttribute="leading" id="pSS-lq-efl"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="label" destination="oss-YH-ucc" id="UJk-SH-WlQ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="iPV-1j-3aO" id="Xac-Wm-qAd"/>
+                                    <outlet property="delegate" destination="iPV-1j-3aO" id="9Wh-8e-Qd2"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Fug-OL-lTj" firstAttribute="trailing" secondItem="e97-mD-hDk" secondAttribute="trailing" id="40l-Dk-ZLT"/>
+                            <constraint firstItem="Fug-OL-lTj" firstAttribute="leading" secondItem="e97-mD-hDk" secondAttribute="leading" id="E9F-W1-IwQ"/>
+                            <constraint firstItem="Fug-OL-lTj" firstAttribute="bottom" secondItem="e97-mD-hDk" secondAttribute="bottom" id="IXr-Jz-vCj"/>
+                            <constraint firstItem="Fug-OL-lTj" firstAttribute="top" secondItem="e97-mD-hDk" secondAttribute="top" id="hfb-Kg-yn2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="e97-mD-hDk"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Fug-OL-lTj" id="BLr-Kk-kud"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPg-5m-DYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="890" y="133"/>
+            <point key="canvasLocation" x="888.79999999999995" y="132.26600985221674"/>
         </scene>
     </scenes>
 </document>

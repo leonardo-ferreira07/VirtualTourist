@@ -179,8 +179,7 @@ extension MapViewController {
             do {
                 let result = try worker.fetch(fetch)
                 completion(result as! [LocationPin])
-            }
-            catch {
+            } catch {
                 completion([])
                 print("\(error)")
             }
@@ -199,8 +198,7 @@ extension MapViewController {
                 let pin = result.first as! LocationPin
                 completion(pin)
                 print(result.count)
-            }
-            catch {
+            } catch {
                 completion(nil)
                 print("\(error)")
             }
