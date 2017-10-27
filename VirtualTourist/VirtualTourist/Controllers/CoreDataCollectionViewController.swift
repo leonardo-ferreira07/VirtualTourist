@@ -31,16 +31,8 @@ class CoreDataCollectionViewController: UIViewController {
         }
     }
     
-    // MARK: Initializers
+    // MARK: - Initializers
     
-//    init(fetchedResultsController fc : NSFetchedResultsController<NSFetchRequestResult>) {
-//        fetchedResultsController = fc
-////        super.init(style: style)
-//    }
-    
-    // Do not worry about this initializer. I has to be implemented
-    // because of the way Swift interfaces with an Objective C
-    // protocol called NSArchiving. It's not relevant.
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -87,7 +79,7 @@ extension CoreDataCollectionViewController {
             do {
                 try fc.performFetch()
             } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
+                print("Error while trying to perform a search: \n\(e)\n\(String(describing: fetchedResultsController))")
             }
         }
     }
@@ -132,7 +124,7 @@ extension CoreDataCollectionViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        collectionView.reloadData()
+
     }
 }
 
