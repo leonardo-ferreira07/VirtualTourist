@@ -10,7 +10,7 @@ import Foundation
 
 struct FlickrSearchClient {
     
-    static func getFlickrImagesFromLocation(latitude: Double, longitude: Double, completion: @escaping (_ success: Bool) -> Void) {
+    static func getFlickrImagesFromLocation(latitude: Double, longitude: Double, completion: @escaping (_ photos: [FlickrPhoto]) -> Void) {
         let url = APIClient.buildURL([
             Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
             Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey,
@@ -23,13 +23,12 @@ struct FlickrSearchClient {
         _ = APIClient.performRequestReturnsData(url, completion: { (data, error) in
             
             guard let data = data else {
-                completion(false)
+                completion([])
                 return
             }
             
             if let decoded = try? JSONDecoder().decode(FlickrPhotos.self, from: data) {
-                print(decoded)
-                completion(true)
+                completion(decoded.main.photos)
             }
             
         }) {

@@ -24,14 +24,35 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         addGesture()
-        
-//        addNewLocationToDatabase(-90, longitude: -90)
-        getPinLocations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        getPinLocations { (pins) in
+            
+            var annotations = [MKPointAnnotation]()
+            
+            for pin in pins {
+                print(pin)
+                
+                let lat = CLLocationDegrees(pin.latitude)
+                let long = CLLocationDegrees(pin.longitude)
+                
+                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate
+                annotation.title = "\(pin.latitude) \(pin.longitude)"
+                
+                annotations.append(annotation)
+            }
+            
+            DispatchQueue.main.async {
+                self.mapView.addAnnotations(annotations)
+            }
+        }
         
         if MapHelper.didGetFirstCoodinates {
             let span: MKCoordinateSpan = MKCoordinateSpanMake(MapHelper.latitudeDelta, MapHelper.longitudeDelta)
@@ -40,6 +61,18 @@ class MapViewController: UIViewController {
             self.mapView.setRegion(region, animated: true)
         }
         
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? PhotosAlbumViewController {
+            if let pin = sender as? (Double, Double) {
+                print(pin.0)
+                viewController.latitude = pin.0
+                viewController.longitude = pin.1
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,7 +104,18 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            performSegue(withIdentifier: "showPhotosAlbum", sender: nil)
+            guard let latitude = view.annotation?.coordinate.latitude, let longitude = view.annotation?.coordinate.longitude else {
+                print("error")
+                return
+            }
+            getPinLocation(latitude, longitude: longitude, completion: { (pin) in
+                if let pin = pin {
+                    let tupple = (pin.latitude, pin.longitude)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "showPhotosAlbum", sender: tupple)
+                    }
+                }
+            })
         }
     }
     
@@ -124,18 +168,40 @@ extension MapViewController {
 extension MapViewController {
     
     func addNewLocationToDatabase(_ latitude: Double, longitude: Double) {
-        
-        _ = LocationPin(name: "\(latitude) \(longitude)", latitude: latitude, longitude: longitude, context: CoreDataHelper.shared.stack.backgroundContext)
+        CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
+            _ = LocationPin(name: "\(latitude) \(longitude)", latitude: latitude, longitude: longitude, context: worker)
+        })
     }
     
-    func getPinLocations() {
+    func getPinLocations(completion: @escaping ([LocationPin]) -> Void) {
         CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
-            let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
             do {
-                let result = try worker.fetch(fr)
-                print((result.first as! LocationPin).latitude)
+                let result = try worker.fetch(fetch)
+                completion(result as! [LocationPin])
             }
             catch {
+                completion([])
+                print("\(error)")
+            }
+        })
+    }
+    
+    func getPinLocation(_ latitude: Double, longitude: Double, completion: @escaping (LocationPin?) -> Void) {
+        CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
+            let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude])
+            let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude])
+            let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred])
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+            fetch.predicate = predicateCompound
+            do {
+                let result = try worker.fetch(fetch)
+                let pin = result.first as! LocationPin
+                completion(pin)
+                print(result.count)
+            }
+            catch {
+                completion(nil)
                 print("\(error)")
             }
         })
