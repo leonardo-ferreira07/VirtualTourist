@@ -102,7 +102,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
                 let pin = result.first as! LocationPin
                 for photo in photos {
                     print(photo)
-                    pin.addToPhotos(Photo(url: photo.photoURL, imageData: NSData(), context: self.fetchedResultsController!.managedObjectContext))
+                    pin.addToPhotos(Photo(url: photo.photoURL, imageData: nil, context: self.fetchedResultsController!.managedObjectContext))
                 }
                 
                 let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
@@ -131,6 +131,56 @@ extension PhotosAlbumViewController {
         cell.label.text = photo.url
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? PhotoCollectionViewCell {
+            let photo = fetchedResultsController!.object(at: indexPath) as! Photo
+            let url = photo.url ?? ""
+            
+            if photo.imageData != nil {
+                cell.imageView.image = UIImage.init(data: photo.imageData! as Data)
+            } else {
+                _ = cell.imageView.setImage(photo.url, completion: { (image, data) in
+                    guard let data = data else {
+                        return
+                    }
+                    
+                    CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
+                        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+                        fr.predicate = NSPredicate(format: "url = %@", argumentArray: [url])
+                        do {
+                            let result = try worker.fetch(fr).first as! Photo
+                            result.imageData = data as NSData
+                        } catch {
+                            
+                        }
+                    })
+                })
+            }
+        }
+        
+    }
+    
+}
+
+// MARK: - Flow layout
+
+extension PhotosAlbumViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 3.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 3.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let space: CGFloat = 3.0
+        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        
+        return CGSize(width: dimension, height: dimension)
     }
     
 }
