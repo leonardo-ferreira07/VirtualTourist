@@ -14,25 +14,43 @@ struct Constants {
     
     static let apiScheme = "https"
     
-    // MARK: - Hosts
+    // MARK: - Host
     
-    static let apiHostUdacity = "www.udacity.com"
+    static let apiHostFlickr = "api.flickr.com"
     
-    static let apiHostParseClasses = "parse.udacity.com"
+    // MARK: - Path
     
-    // MARK: - Session
+    static let apiPathFlickr = "/services/rest"
     
-    static let apiPathUdacitySession = "api/session"
+    // MARK: - Flickr Parameters
     
-    // MARK: - User
+    struct FlickrParameterValues {
+        static let SearchMethod = "flickr.photos.search"
+        static let APIKey = "f129577dffb2d550fe57abc1ad307e2b"
+        static let ResponseFormat = "json"
+        static let DisableJSONCallback = "1"
+        static let MediumURL = "url_m"
+        static let UseSafeSearch = "1"
+    }
     
-    static let apiPathUdacityUserData = "api/users"
+    // MARK: - Flickr Parameter Keys
     
-    // MARK: - Students location
+    struct FlickrParameterKeys {
+        static let Method = "method"
+        static let APIKey = "api_key"
+        static let Extras = "extras"
+        static let Format = "format"
+        static let NoJSONCallback = "nojsoncallback"
+        static let SafeSearch = "safe_search"
+        static let BoundingBox = "bbox"
+    }
     
-    static let apiPathUdacityParseStudentLocations = "parse/classes/StudentLocation"
+    // MARK: - Flickr BBox
     
-    // MARK: - URL Sign up
-    
-    static let urlSignUp = "https://www.udacity.com/account/auth#!/signup"
+    struct FlickrBBox {
+        static let SearchBBoxHalfWidth = 1.0
+        static let SearchBBoxHalfHeight = 1.0
+        static let SearchLatRange = (-90.0, 90.0)
+        static let SearchLonRange = (-180.0, 180.0)
+    }
 }

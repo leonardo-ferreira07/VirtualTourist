@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A714728A1FA3384F00C89291 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71472891FA3384F00C89291 /* CoreDataStack.swift */; };
 		A714728C1FA338B100C89291 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714728B1FA338B100C89291 /* CoreDataHelper.swift */; };
+		A714728E1FA33C4C00C89291 /* FlickrSearchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714728D1FA33C4C00C89291 /* FlickrSearchClient.swift */; };
 		A73D8CC81FA1F29800ADE124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8CC71FA1F29800ADE124 /* AppDelegate.swift */; };
 		A73D8CCD1FA1F29800ADE124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A73D8CCB1FA1F29800ADE124 /* Main.storyboard */; };
 		A73D8CCF1FA1F29800ADE124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73D8CCE1FA1F29800ADE124 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		A71472891FA3384F00C89291 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		A714728B1FA338B100C89291 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		A714728D1FA33C4C00C89291 /* FlickrSearchClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchClient.swift; sourceTree = "<group>"; };
 		A73D8CC41FA1F29800ADE124 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73D8CC71FA1F29800ADE124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A73D8CCC1FA1F29800ADE124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		A73D8D021FA200D200ADE124 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				A714728D1FA33C4C00C89291 /* FlickrSearchClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				A73D8CF81FA1F2F600ADE124 /* MapViewController.swift in Sources */,
 				A73D8D141FA206CB00ADE124 /* Photo+CoreDataClass.swift in Sources */,
 				A73D8D171FA206CB00ADE124 /* LocationPin+CoreDataProperties.swift in Sources */,
+				A714728E1FA33C4C00C89291 /* FlickrSearchClient.swift in Sources */,
 				A714728A1FA3384F00C89291 /* CoreDataStack.swift in Sources */,
 				A73D8CC81FA1F29800ADE124 /* AppDelegate.swift in Sources */,
 				A73D8D061FA203BA00ADE124 /* VirtualTourist.xcdatamodeld in Sources */,
