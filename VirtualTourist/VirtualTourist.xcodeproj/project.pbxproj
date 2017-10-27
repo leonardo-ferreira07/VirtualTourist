@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A714728A1FA3384F00C89291 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71472891FA3384F00C89291 /* CoreDataStack.swift */; };
+		A714728C1FA338B100C89291 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714728B1FA338B100C89291 /* CoreDataHelper.swift */; };
 		A73D8CC81FA1F29800ADE124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8CC71FA1F29800ADE124 /* AppDelegate.swift */; };
 		A73D8CCD1FA1F29800ADE124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A73D8CCB1FA1F29800ADE124 /* Main.storyboard */; };
 		A73D8CCF1FA1F29800ADE124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73D8CCE1FA1F29800ADE124 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A71472891FA3384F00C89291 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		A714728B1FA338B100C89291 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		A73D8CC41FA1F29800ADE124 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73D8CC71FA1F29800ADE124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A73D8CCC1FA1F29800ADE124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A71472881FA3384200C89291 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				A71472891FA3384F00C89291 /* CoreDataStack.swift */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
 		A73D8CBB1FA1F29800ADE124 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				A73D8CFA1FA1F7BD00ADE124 /* MapHelper.swift */,
+				A714728B1FA338B100C89291 /* CoreDataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -199,6 +212,7 @@
 		A73D8D031FA2039900ADE124 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A71472881FA3384200C89291 /* Stack */,
 				A73D8D071FA2062400ADE124 /* Classes */,
 				A73D8D041FA203BA00ADE124 /* VirtualTourist.xcdatamodeld */,
 			);
@@ -361,10 +375,12 @@
 				A73D8CF81FA1F2F600ADE124 /* MapViewController.swift in Sources */,
 				A73D8D141FA206CB00ADE124 /* Photo+CoreDataClass.swift in Sources */,
 				A73D8D171FA206CB00ADE124 /* LocationPin+CoreDataProperties.swift in Sources */,
+				A714728A1FA3384F00C89291 /* CoreDataStack.swift in Sources */,
 				A73D8CC81FA1F29800ADE124 /* AppDelegate.swift in Sources */,
 				A73D8D061FA203BA00ADE124 /* VirtualTourist.xcdatamodeld in Sources */,
 				A73D8CFB1FA1F7BD00ADE124 /* MapHelper.swift in Sources */,
 				A73D8D011FA2004A00ADE124 /* APIClient.swift in Sources */,
+				A714728C1FA338B100C89291 /* CoreDataHelper.swift in Sources */,
 				A73D8D161FA206CB00ADE124 /* LocationPin+CoreDataClass.swift in Sources */,
 				A73D8D1A1FA216D700ADE124 /* PhotosAlbumViewController.swift in Sources */,
 				A73D8D151FA206CB00ADE124 /* Photo+CoreDataProperties.swift in Sources */,
