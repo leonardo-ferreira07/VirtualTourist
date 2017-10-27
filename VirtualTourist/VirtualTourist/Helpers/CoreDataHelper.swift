@@ -18,5 +18,6 @@ class CoreDataHelper {
     
     public func setupDatabase() {
         stack = CoreDataStack(modelName: "VirtualTourist")!
+        stack.autoSave(1)
     }
 }

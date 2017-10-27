@@ -36,9 +36,6 @@ class MapViewController: UIViewController {
             self.mapView.setRegion(region, animated: true)
         }
         
-        FlickrSearchClient.getFlickrImagesFromLocation(latitude: 37.33182, longitude: -122.03118) { (success) in
-            
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,6 +101,8 @@ extension MapViewController {
             annotation.coordinate = newCoordinates
             annotation.title = "\(newCoordinates.latitude) \(newCoordinates.longitude)"
             mapView.addAnnotation(annotation)
+            
+            addNewLocationToDatabase(Double(newCoordinates.latitude), longitude: Double(newCoordinates.longitude))
         }
         
         if gestureRecognizer.state == UIGestureRecognizerState.began {
@@ -112,6 +111,17 @@ extension MapViewController {
             canAddPin = true
         }
         
+    }
+    
+}
+
+// MARK: - Core Data operations
+
+extension MapViewController {
+    
+    func addNewLocationToDatabase(_ latitude: Double, longitude: Double) {
+        
+        _ = LocationPin(name: "\(latitude) \(longitude)", latitude: latitude, longitude: longitude, context: CoreDataHelper.shared.stack.backgroundContext)
     }
     
 }

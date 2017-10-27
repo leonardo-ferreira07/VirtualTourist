@@ -18,6 +18,10 @@ class PhotosAlbumViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        FlickrSearchClient.getFlickrImagesFromLocation(latitude: 37.33182, longitude: -122.03118) { (success) in
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
