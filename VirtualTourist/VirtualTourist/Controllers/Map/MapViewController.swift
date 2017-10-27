@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class MapViewController: UIViewController {
     
@@ -23,6 +24,9 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         addGesture()
+        
+//        addNewLocationToDatabase(-90, longitude: -90)
+        getPinLocations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,4 +128,17 @@ extension MapViewController {
         _ = LocationPin(name: "\(latitude) \(longitude)", latitude: latitude, longitude: longitude, context: CoreDataHelper.shared.stack.backgroundContext)
     }
     
+    func getPinLocations() {
+        CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
+            let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+            do {
+                let result = try worker.fetch(fr)
+                print((result.first as! LocationPin).latitude)
+            }
+            catch {
+                print("\(error)")
+            }
+        })
+    }
+
 }
