@@ -35,6 +35,10 @@ class MapViewController: UIViewController {
             let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
             self.mapView.setRegion(region, animated: true)
         }
+        
+        FlickrSearchClient.getFlickrImagesFromLocation(latitude: 37.33182, longitude: -122.03118) { (success) in
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {

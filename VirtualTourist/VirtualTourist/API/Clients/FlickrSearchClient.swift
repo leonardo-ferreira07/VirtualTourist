@@ -20,23 +20,17 @@ struct FlickrSearchClient {
             Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat,
             Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback] as [String: AnyObject], withHost: Constants.apiHostFlickr, withPathExtension: Constants.apiPathFlickr)
         
-        _ = APIClient.performRequest(url, completion: { (dict, error) in
+        _ = APIClient.performRequestReturnsData(url, completion: { (data, error) in
             
-            guard let dict = dict else {
+            guard let data = data else {
                 completion(false)
                 return
             }
             
-            completion(true)
-//            if let array = dict[StudentLocationKeys.results.rawValue] as? [[String: AnyObject]] {
-//                MemoryStorage.shared.studentsLocations.removeAll()
-//                for object in array {
-//                    MemoryStorage.shared.studentsLocations.append(StudentLocation(withDictionary: object))
-//                }
-//                completion(true)
-//            } else {
-//                completion(false)
-//            }
+            if let decoded = try? JSONDecoder().decode(FlickrPhotos.self, from: data) {
+                print(decoded)
+                completion(true)
+            }
             
         }) {
             
