@@ -8,10 +8,13 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class PhotosAlbumViewController: CoreDataCollectionViewController {
 
     @IBOutlet weak var noImagesLabel: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var newCollectionButton: UIBarButtonItem!
     
     var latitude: Double?
     var longitude: Double?
@@ -19,6 +22,8 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setMapLocation()
         
         let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude as Any])
         let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude as Any])
@@ -84,6 +89,11 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Actions
+    
+    @IBAction func newCollectionPressed(_ sender: Any) {
+        
+    }
     
     func getPhotos() {
         guard let latitude = latitude, let longitude = longitude else {
@@ -92,7 +102,9 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
         }
         
         view.startLoadingAnimation()
+        shouldLockUI(true)
         FlickrSearchClient.getFlickrImagesFromLocation(latitude: latitude, longitude: longitude) { (photos) in
+            self.shouldLockUI(false)
             
             if photos.count > 0 {
                 self.showNoImagesMessage(false)
@@ -147,7 +159,6 @@ extension PhotosAlbumViewController {
             
             let url = photo.url ?? ""
             
-            cell.imageView.image = #imageLiteral(resourceName: "icoImagePlaceholder")
             if photo.imageData != nil {
                 cell.imageView.image = UIImage.init(data: photo.imageData! as Data)
             } else {
@@ -207,5 +218,33 @@ extension PhotosAlbumViewController {
     func showNoImagesMessage(_ show: Bool) {
         collectionView.isHidden = show
         noImagesLabel.isHidden = !show
+    }
+}
+
+// MARK: - Lock UI
+
+extension PhotosAlbumViewController {
+    func shouldLockUI(_ lock: Bool) {
+        newCollectionButton.isEnabled = !lock
+    }
+}
+
+// MARK: - Map Settings
+
+extension PhotosAlbumViewController {
+    func setMapLocation() {
+        if let latitude = latitude, let longitude = longitude {
+            let latDelta: CLLocationDegrees = 0.005
+            let lonDelta: CLLocationDegrees = 0.005
+            let span: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+            let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+            self.mapView.setRegion(region, animated: true)
+            let point = MKPointAnnotation()
+            point.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+            let userAnnotationView:MKPinAnnotationView = MKPinAnnotationView(annotation: point, reuseIdentifier: nil)
+            self.mapView.addAnnotation(userAnnotationView.annotation!)
+            self.mapView.showsUserLocation = true
+        }
     }
 }

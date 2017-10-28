@@ -67,7 +67,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fug-OL-lTj">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="184" width="375" height="545"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="l8u-og-Tbx">
                                     <size key="itemSize" width="375" height="50"/>
@@ -105,7 +105,7 @@
                                 </connections>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, no images found at this location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dva-3E-Rwp">
-                                <rect key="frame" x="39" y="381" width="297" height="60"/>
+                                <rect key="frame" x="39.666666666666657" y="426.66666666666669" width="297" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="t1N-Kp-41H"/>
                                 </constraints>
@@ -113,20 +113,46 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8dU-m2-0jF">
+                                <rect key="frame" x="0.0" y="44" width="375" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="a26-Jm-SHh"/>
+                                </constraints>
+                            </mapView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKW-5B-4ao">
+                                <rect key="frame" x="0.0" y="729" width="375" height="49"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kTR-GE-d8i"/>
+                                    <barButtonItem title="New Collection" id="Pyh-Wo-gul">
+                                        <connections>
+                                            <action selector="newCollectionPressed:" destination="iPV-1j-3aO" id="mN7-82-XWy"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3LB-Dq-4KV"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="8dU-m2-0jF" firstAttribute="top" secondItem="e97-mD-hDk" secondAttribute="top" id="2A6-3w-B9F"/>
                             <constraint firstItem="Fug-OL-lTj" firstAttribute="trailing" secondItem="e97-mD-hDk" secondAttribute="trailing" id="40l-Dk-ZLT"/>
+                            <constraint firstItem="8dU-m2-0jF" firstAttribute="trailing" secondItem="e97-mD-hDk" secondAttribute="trailing" id="6ra-T7-z1X"/>
                             <constraint firstItem="Fug-OL-lTj" firstAttribute="leading" secondItem="e97-mD-hDk" secondAttribute="leading" id="E9F-W1-IwQ"/>
-                            <constraint firstItem="dva-3E-Rwp" firstAttribute="centerX" secondItem="e97-mD-hDk" secondAttribute="centerX" id="ELE-UZ-hnl"/>
-                            <constraint firstItem="Fug-OL-lTj" firstAttribute="bottom" secondItem="e97-mD-hDk" secondAttribute="bottom" id="IXr-Jz-vCj"/>
-                            <constraint firstItem="dva-3E-Rwp" firstAttribute="centerY" secondItem="e97-mD-hDk" secondAttribute="centerY" id="dXS-0E-7Yz"/>
-                            <constraint firstItem="Fug-OL-lTj" firstAttribute="top" secondItem="e97-mD-hDk" secondAttribute="top" id="hfb-Kg-yn2"/>
+                            <constraint firstItem="dva-3E-Rwp" firstAttribute="centerY" secondItem="Fug-OL-lTj" secondAttribute="centerY" id="IA2-2E-Daa"/>
+                            <constraint firstItem="QKW-5B-4ao" firstAttribute="leading" secondItem="e97-mD-hDk" secondAttribute="leading" id="LQv-3H-wne"/>
+                            <constraint firstItem="QKW-5B-4ao" firstAttribute="bottom" secondItem="e97-mD-hDk" secondAttribute="bottom" id="bTh-KW-WwH"/>
+                            <constraint firstItem="QKW-5B-4ao" firstAttribute="top" secondItem="Fug-OL-lTj" secondAttribute="bottom" id="brJ-jN-voB"/>
+                            <constraint firstItem="8dU-m2-0jF" firstAttribute="leading" secondItem="e97-mD-hDk" secondAttribute="leading" id="ev4-am-mmx"/>
+                            <constraint firstItem="dva-3E-Rwp" firstAttribute="centerX" secondItem="Fug-OL-lTj" secondAttribute="centerX" id="hXf-Zy-eZd"/>
+                            <constraint firstItem="QKW-5B-4ao" firstAttribute="trailing" secondItem="e97-mD-hDk" secondAttribute="trailing" id="kfd-Pk-YID"/>
+                            <constraint firstItem="Fug-OL-lTj" firstAttribute="top" secondItem="8dU-m2-0jF" secondAttribute="bottom" id="nnB-XT-eOr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e97-mD-hDk"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Fug-OL-lTj" id="BLr-Kk-kud"/>
+                        <outlet property="mapView" destination="8dU-m2-0jF" id="NyN-eb-3JE"/>
+                        <outlet property="newCollectionButton" destination="Pyh-Wo-gul" id="VuC-EO-aLT"/>
                         <outlet property="noImagesLabel" destination="dva-3E-Rwp" id="sF9-hR-YXJ"/>
                     </connections>
                 </viewController>
