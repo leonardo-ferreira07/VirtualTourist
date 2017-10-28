@@ -11,6 +11,8 @@ import CoreData
 
 class PhotosAlbumViewController: CoreDataCollectionViewController {
 
+    @IBOutlet weak var noImagesLabel: UILabel!
+    
     var latitude: Double?
     var longitude: Double?
     var locationPin: LocationPin?
@@ -92,30 +94,37 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
         view.startLoadingAnimation()
         FlickrSearchClient.getFlickrImagesFromLocation(latitude: latitude, longitude: longitude) { (photos) in
             
-            let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude])
-            let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude])
-            let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred])
-            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
-            fetch.predicate = predicateCompound
+            if photos.count > 0 {
+                self.showNoImagesMessage(false)
             
-            do {
-                let result = try self.fetchedResultsController!.managedObjectContext.fetch(fetch)
-                let pin = result.first as! LocationPin
-                for photo in photos {
-                    print(photo)
-                    pin.addToPhotos(Photo(url: photo.photoURL, imageData: nil, context: self.fetchedResultsController!.managedObjectContext))
+                let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude])
+                let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude])
+                let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred])
+                let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+                fetch.predicate = predicateCompound
+                
+                do {
+                    let result = try self.fetchedResultsController!.managedObjectContext.fetch(fetch)
+                    let pin = result.first as! LocationPin
+                    for photo in photos {
+                        print(photo)
+                        pin.addToPhotos(Photo(url: photo.photoURL, imageData: nil, context: self.fetchedResultsController!.managedObjectContext))
+                    }
+                    
+                    let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+                    fr.predicate = NSPredicate(format: "locationPin = %@", argumentArray: [self.locationPin])
+                    fr.sortDescriptors = [NSSortDescriptor(key: "url", ascending: true)]
+                    
+                    // Create the FetchedResultsController
+                    self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: self.fetchedResultsController!.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+                    self.view.stopLoadingAnimation()
+                    
+                } catch {
+                    print("\(error)")
                 }
-                
-                let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-                fr.predicate = NSPredicate(format: "locationPin = %@", argumentArray: [self.locationPin])
-                fr.sortDescriptors = [NSSortDescriptor(key: "url", ascending: true)]
-                
-                // Create the FetchedResultsController
-                self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: self.fetchedResultsController!.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            } else {
                 self.view.stopLoadingAnimation()
-                
-            } catch {
-                print("\(error)")
+                self.showNoImagesMessage(true)
             }
         }
     }
@@ -184,4 +193,13 @@ extension PhotosAlbumViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: dimension, height: dimension)
     }
     
+}
+
+// MARK: - Error message handling
+
+extension PhotosAlbumViewController {
+    func showNoImagesMessage(_ show: Bool) {
+        collectionView.isHidden = show
+        noImagesLabel.isHidden = !show
+    }
 }
