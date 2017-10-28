@@ -93,7 +93,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
                     }
                     
                     let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-                    fr.predicate = NSPredicate(format: "locationPin = %@", argumentArray: [self.locationPin])
+                    fr.predicate = NSPredicate(format: "locationPin = %@", argumentArray: [self.locationPin as Any])
                     fr.sortDescriptors = [NSSortDescriptor(key: "url", ascending: true)]
                     
                     // Create the FetchedResultsController
