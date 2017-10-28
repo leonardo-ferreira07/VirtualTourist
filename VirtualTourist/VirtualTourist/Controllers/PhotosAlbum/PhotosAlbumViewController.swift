@@ -193,6 +193,12 @@ extension PhotosAlbumViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: dimension, height: dimension)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let context = fetchedResultsController?.managedObjectContext, let photo = fetchedResultsController?.object(at: indexPath) as? Photo {
+            context.delete(photo)
+        }
+    }
+    
 }
 
 // MARK: - Error message handling
