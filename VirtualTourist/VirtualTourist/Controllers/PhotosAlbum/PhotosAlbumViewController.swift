@@ -89,6 +89,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
             return
         }
         
+        view.startLoadingAnimation()
         FlickrSearchClient.getFlickrImagesFromLocation(latitude: latitude, longitude: longitude) { (photos) in
             
             let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude])
@@ -111,6 +112,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
                 
                 // Create the FetchedResultsController
                 self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: self.fetchedResultsController!.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+                self.view.stopLoadingAnimation()
                 
             } catch {
                 print("\(error)")

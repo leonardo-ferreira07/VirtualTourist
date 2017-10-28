@@ -30,6 +30,10 @@
 		A73D8D161FA206CB00ADE124 /* LocationPin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8D121FA206CB00ADE124 /* LocationPin+CoreDataClass.swift */; };
 		A73D8D171FA206CB00ADE124 /* LocationPin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8D131FA206CB00ADE124 /* LocationPin+CoreDataProperties.swift */; };
 		A73D8D1A1FA216D700ADE124 /* PhotosAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73D8D191FA216D700ADE124 /* PhotosAlbumViewController.swift */; };
+		A7E7D8E41FA42F3500A1C4EE /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7E7D8E11FA42F3400A1C4EE /* LoadingView.xib */; };
+		A7E7D8E51FA42F3500A1C4EE /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E7D8E21FA42F3400A1C4EE /* LoadingView.swift */; };
+		A7E7D8E61FA42F3500A1C4EE /* LoadingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E7D8E31FA42F3400A1C4EE /* LoadingViewPresenter.swift */; };
+		A7E7D8E81FA42F8800A1C4EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E7D8E71FA42F8800A1C4EE /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,10 @@
 		A73D8D121FA206CB00ADE124 /* LocationPin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPin+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A73D8D131FA206CB00ADE124 /* LocationPin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A73D8D191FA216D700ADE124 /* PhotosAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAlbumViewController.swift; sourceTree = "<group>"; };
+		A7E7D8E11FA42F3400A1C4EE /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		A7E7D8E21FA42F3400A1C4EE /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		A7E7D8E31FA42F3400A1C4EE /* LoadingViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewPresenter.swift; sourceTree = "<group>"; };
+		A7E7D8E71FA42F8800A1C4EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +143,7 @@
 		A714729C1FA3863D00C89291 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A7E7D8E01FA42F2000A1C4EE /* Customs */,
 				A714729D1FA3864300C89291 /* Cells */,
 			);
 			path = Views;
@@ -160,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				A72ACF281FA39680007AA987 /* UIImageView+VirtualTourist.swift */,
+				A7E7D8E71FA42F8800A1C4EE /* Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -303,6 +313,16 @@
 			path = PhotosAlbum;
 			sourceTree = "<group>";
 		};
+		A7E7D8E01FA42F2000A1C4EE /* Customs */ = {
+			isa = PBXGroup;
+			children = (
+				A7E7D8E21FA42F3400A1C4EE /* LoadingView.swift */,
+				A7E7D8E11FA42F3400A1C4EE /* LoadingView.xib */,
+				A7E7D8E31FA42F3400A1C4EE /* LoadingViewPresenter.swift */,
+			);
+			path = Customs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -411,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A73D8CD21FA1F29800ADE124 /* LaunchScreen.storyboard in Resources */,
+				A7E7D8E41FA42F3500A1C4EE /* LoadingView.xib in Resources */,
 				A73D8CCF1FA1F29800ADE124 /* Assets.xcassets in Resources */,
 				A73D8CCD1FA1F29800ADE124 /* Main.storyboard in Resources */,
 			);
@@ -450,10 +471,13 @@
 				A73D8D061FA203BA00ADE124 /* VirtualTourist.xcdatamodeld in Sources */,
 				A73D8CFB1FA1F7BD00ADE124 /* MapHelper.swift in Sources */,
 				A73D8D011FA2004A00ADE124 /* APIClient.swift in Sources */,
+				A7E7D8E81FA42F8800A1C4EE /* Extensions.swift in Sources */,
 				A714728C1FA338B100C89291 /* CoreDataHelper.swift in Sources */,
+				A7E7D8E61FA42F3500A1C4EE /* LoadingViewPresenter.swift in Sources */,
 				A73D8D161FA206CB00ADE124 /* LocationPin+CoreDataClass.swift in Sources */,
 				A73D8D1A1FA216D700ADE124 /* PhotosAlbumViewController.swift in Sources */,
 				A73D8CFE1FA2001800ADE124 /* Constants.swift in Sources */,
+				A7E7D8E51FA42F3500A1C4EE /* LoadingView.swift in Sources */,
 				A71472991FA37B5200C89291 /* CoreDataCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
