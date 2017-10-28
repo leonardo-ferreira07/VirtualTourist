@@ -126,7 +126,7 @@ extension PhotosAlbumViewController {
         if let cell = cell as? PhotoCollectionViewCell {
             let photo = fetchedResultsController!.object(at: indexPath) as! Photo
             
-            let url = photo.url ?? ""
+            let tupple: (String, Double, Double) = (photo.url ?? "", photo.locationPin?.latitude ?? 0, photo.locationPin?.longitude ?? 0)
             
             if photo.imageData != nil {
                 cell.imageView.image = UIImage.init(data: photo.imageData! as Data)
@@ -138,7 +138,11 @@ extension PhotosAlbumViewController {
                     
                     CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
                         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-                        fr.predicate = NSPredicate(format: "url = %@", argumentArray: [url])
+                        let latitudePred = NSPredicate.init(format: "locationPin.latitude == %@", argumentArray: [tupple.1 as Any])
+                        let longitudePred = NSPredicate.init(format: "locationPin.longitude == %@", argumentArray: [tupple.2 as Any])
+                        let urlPred = NSPredicate.init(format: "url == %@", argumentArray: [tupple.0 as Any])
+                        let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred, urlPred])
+                        fr.predicate = predicateCompound
                         do {
                             let result = try worker.fetch(fr).first as! Photo
                             result.imageData = data as NSData
