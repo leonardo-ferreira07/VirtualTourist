@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum EntitiesNames: String {
+    case locationPin = "LocationPin"
+    case photo = "Photo"
+}
+
 class CoreDataHelper {
     
     static let shared = CoreDataHelper()

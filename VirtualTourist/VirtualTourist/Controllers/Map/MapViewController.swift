@@ -15,6 +15,10 @@ class MapViewController: UIViewController {
     enum PinIdentifier: String {
         case pin
     }
+    
+    enum PhotoAlbumSegues: String {
+        case showPhotosAlbum
+    }
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -112,7 +116,7 @@ extension MapViewController: MKMapViewDelegate {
                 if let pin = pin {
                     let tupple = (pin.latitude, pin.longitude)
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "showPhotosAlbum", sender: tupple)
+                        self.performSegue(withIdentifier: PhotoAlbumSegues.showPhotosAlbum.rawValue, sender: tupple)
                     }
                 }
             })
@@ -175,7 +179,7 @@ extension MapViewController {
     
     func getPinLocations(completion: @escaping ([LocationPin]) -> Void) {
         CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
-            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.locationPin.rawValue)
             do {
                 let result = try worker.fetch(fetch)
                 completion(result as! [LocationPin])
@@ -191,7 +195,7 @@ extension MapViewController {
             let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude])
             let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude])
             let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred])
-            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.locationPin.rawValue)
             fetch.predicate = predicateCompound
             do {
                 let result = try worker.fetch(fetch)

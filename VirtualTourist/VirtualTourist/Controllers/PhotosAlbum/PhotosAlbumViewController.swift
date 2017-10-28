@@ -28,14 +28,14 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
         let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude as Any])
         let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude as Any])
         let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred])
-        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.locationPin.rawValue)
         fetch.predicate = predicateCompound
         do {
             let result = try CoreDataHelper.shared.stack.context.fetch(fetch)
             let lala = result.first as! LocationPin
             locationPin = lala
             
-            let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+            let fr = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.photo.rawValue)
             fr.predicate = NSPredicate(format: "locationPin = %@", argumentArray: [lala])
             fr.sortDescriptors = [NSSortDescriptor(key: "url", ascending: true)]
             
@@ -81,7 +81,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
                 let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude])
                 let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude])
                 let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred])
-                let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
+                let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.locationPin.rawValue)
                 fetch.predicate = predicateCompound
                 
                 do {
@@ -92,7 +92,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
                         pin.addToPhotos(Photo(url: photo.photoURL, imageData: nil, context: self.fetchedResultsController!.managedObjectContext))
                     }
                     
-                    let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+                    let fr = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.photo.rawValue)
                     fr.predicate = NSPredicate(format: "locationPin = %@", argumentArray: [self.locationPin as Any])
                     fr.sortDescriptors = [NSSortDescriptor(key: "url", ascending: true)]
                     
@@ -137,7 +137,7 @@ extension PhotosAlbumViewController {
                     }
                     
                     CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
-                        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+                        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.photo.rawValue)
                         let latitudePred = NSPredicate.init(format: "locationPin.latitude == %@", argumentArray: [tupple.1 as Any])
                         let longitudePred = NSPredicate.init(format: "locationPin.longitude == %@", argumentArray: [tupple.2 as Any])
                         let urlPred = NSPredicate.init(format: "url == %@", argumentArray: [tupple.0 as Any])
