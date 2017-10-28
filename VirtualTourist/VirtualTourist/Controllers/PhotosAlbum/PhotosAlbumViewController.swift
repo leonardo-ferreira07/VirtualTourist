@@ -56,37 +56,6 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
-//        guard let latitude = latitude, let longitude = longitude else {
-//            print("error")
-//            return
-//        }
-//
-//        FlickrSearchClient.getFlickrImagesFromLocation(latitude: latitude, longitude: longitude) { (photos) in
-//            CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
-//                let latitudePred = NSPredicate.init(format: "latitude == %@", argumentArray: [latitude])
-//                let longitudePred = NSPredicate.init(format: "longitude == %@", argumentArray: [longitude])
-//                let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred])
-//                let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationPin")
-//                fetch.predicate = predicateCompound
-//                do {
-//                    let result = try worker.fetch(fetch)
-//                    let pin = result.first as! LocationPin
-//                    for photo in photos {
-//                        print(photo)
-//                        pin.addToPhotos(Photo(url: photo.photoURL, imageData: NSData(), context: worker))
-//                    }
-//                } catch {
-//                    print("\(error)")
-//                }
-//            })
-//        }
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Actions
