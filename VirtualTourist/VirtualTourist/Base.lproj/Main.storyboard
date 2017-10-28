@@ -83,30 +83,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oss-YH-ucc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OCX-ug-dDg">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="OCX-ug-dDg">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="oss-YH-ucc" secondAttribute="bottom" id="7Df-x6-PkI"/>
                                             <constraint firstItem="OCX-ug-dDg" firstAttribute="leading" secondItem="nn3-wI-RKX" secondAttribute="leading" id="FEj-xY-qe8"/>
                                             <constraint firstAttribute="trailing" secondItem="OCX-ug-dDg" secondAttribute="trailing" id="N8F-8U-Skt"/>
-                                            <constraint firstItem="oss-YH-ucc" firstAttribute="top" secondItem="nn3-wI-RKX" secondAttribute="top" id="NU4-UO-CaG"/>
-                                            <constraint firstAttribute="trailing" secondItem="oss-YH-ucc" secondAttribute="trailing" id="ZeB-er-2bB"/>
                                             <constraint firstAttribute="bottom" secondItem="OCX-ug-dDg" secondAttribute="bottom" id="eMd-QY-AgY"/>
-                                            <constraint firstItem="oss-YH-ucc" firstAttribute="leading" secondItem="nn3-wI-RKX" secondAttribute="leading" id="pSS-lq-efl"/>
                                             <constraint firstItem="OCX-ug-dDg" firstAttribute="top" secondItem="nn3-wI-RKX" secondAttribute="top" id="rjn-wn-o28"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="OCX-ug-dDg" id="TRr-08-lSL"/>
-                                            <outlet property="label" destination="oss-YH-ucc" id="UJk-SH-WlQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -134,4 +123,7 @@
             <point key="canvasLocation" x="888.79999999999995" y="132.26600985221674"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icoImagePlaceholder" width="40" height="40"/>
+    </resources>
 </document>

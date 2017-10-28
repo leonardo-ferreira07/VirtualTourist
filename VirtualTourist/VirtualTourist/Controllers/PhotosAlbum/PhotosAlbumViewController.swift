@@ -124,11 +124,8 @@ extension PhotosAlbumViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let photo = fetchedResultsController!.object(at: indexPath) as! Photo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PhotoCollectionViewCell
-        
-        cell.label.text = photo.url
         
         return cell
     }
@@ -136,12 +133,14 @@ extension PhotosAlbumViewController {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? PhotoCollectionViewCell {
             let photo = fetchedResultsController!.object(at: indexPath) as! Photo
+            
             let url = photo.url ?? ""
             
+            cell.imageView.image = #imageLiteral(resourceName: "icoImagePlaceholder")
             if photo.imageData != nil {
                 cell.imageView.image = UIImage.init(data: photo.imageData! as Data)
             } else {
-                _ = cell.imageView.setImage(photo.url, completion: { (image, data) in
+                _ = cell.imageView.setImage(photo.url, placeholder: #imageLiteral(resourceName: "icoImagePlaceholder"), completion: { (image, data) in
                     guard let data = data else {
                         return
                     }
