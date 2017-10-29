@@ -54,7 +54,26 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
     // MARK: - Actions
     
     @IBAction func newCollectionPressed(_ sender: Any) {
-        
+        if let photos = fetchedResultsController?.fetchedObjects as? [Photo] {
+            for photo in photos {
+                let tupple: (String, Double, Double) = (photo.url ?? "", photo.locationPin?.latitude ?? 0, photo.locationPin?.longitude ?? 0)
+                CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
+                    let fr = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.photo.rawValue)
+                    let latitudePred = NSPredicate.init(format: "locationPin.latitude == %@", argumentArray: [tupple.1 as Any])
+                    let longitudePred = NSPredicate.init(format: "locationPin.longitude == %@", argumentArray: [tupple.2 as Any])
+                    let urlPred = NSPredicate.init(format: "url == %@", argumentArray: [tupple.0 as Any])
+                    let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred, urlPred])
+                    fr.predicate = predicateCompound
+                    do {
+                        if let result = try worker.fetch(fr).first as? Photo {
+                            worker.delete(result)
+                        }
+                    } catch {
+                        
+                    }
+                })
+            }
+        }
     }
 
 }
@@ -155,8 +174,9 @@ extension PhotosAlbumViewController {
                         let predicateCompound = NSCompoundPredicate(type: .and, subpredicates: [latitudePred, longitudePred, urlPred])
                         fr.predicate = predicateCompound
                         do {
-                            let result = try worker.fetch(fr).first as! Photo
-                            result.imageData = data as NSData
+                            if let result = try worker.fetch(fr).first as? Photo {
+                                result.imageData = data as NSData
+                            }
                         } catch {
                             
                         }
