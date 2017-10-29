@@ -55,8 +55,12 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
     
     @IBAction func newCollectionPressed(_ sender: Any) {
         if let photos = fetchedResultsController?.fetchedObjects as? [Photo] {
+            let group = DispatchGroup()
+            
             for photo in photos {
                 let tupple: (String, Double, Double) = (photo.url ?? "", photo.locationPin?.latitude ?? 0, photo.locationPin?.longitude ?? 0)
+                
+                group.enter()
                 CoreDataHelper.shared.stack.performBackgroundBatchOperation({ (worker) in
                     let fr = NSFetchRequest<NSFetchRequestResult>(entityName: EntitiesNames.photo.rawValue)
                     let latitudePred = NSPredicate.init(format: "locationPin.latitude == %@", argumentArray: [tupple.1 as Any])
@@ -68,11 +72,16 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
                         if let result = try worker.fetch(fr).first as? Photo {
                             worker.delete(result)
                         }
+                        group.leave()
                     } catch {
                         
                     }
                 })
             }
+            
+            group.notify(queue: .global(), execute: {
+                print("finished")
+            })
         }
     }
 
