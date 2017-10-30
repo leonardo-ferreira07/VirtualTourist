@@ -29,10 +29,10 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
         
         do {
             let result = try CoreDataHelper.shared.stack.context.fetch(fetch)
-            let lala = result.first as! LocationPin
-            locationPin = lala
+            let pin = result.first as! LocationPin
+            locationPin = pin
             
-            let fr = photoFetchRequestWith(lala)
+            let fr = photoFetchRequestWith(pin)
             
             // Create the FetchedResultsController
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: CoreDataHelper.shared.stack.context, sectionNameKeyPath: nil, cacheName: nil)
@@ -183,8 +183,7 @@ extension PhotosAlbumViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? PhotoCollectionViewCell {
-            let photo = fetchedResultsController!.object(at: indexPath) as! Photo
+        if let cell = cell as? PhotoCollectionViewCell, let photo = fetchedResultsController!.object(at: indexPath) as? Photo {
             
             let tupple: (String, Double, Double) = (photo.url ?? "", photo.locationPin?.latitude ?? 0, photo.locationPin?.longitude ?? 0)
             
