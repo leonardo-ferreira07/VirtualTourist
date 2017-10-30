@@ -54,6 +54,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
     // MARK: - Actions
     
     @IBAction func newCollectionPressed(_ sender: Any) {
+        view.startLoadingAnimation()
         if let photos = fetchedResultsController?.fetchedObjects as? [Photo] {
             let group = DispatchGroup()
             
@@ -81,6 +82,8 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
             
             group.notify(queue: .global(), execute: {
                 print("finished")
+                self.view.stopLoadingAnimation()
+                self.getPhotos(withPage: 1)
             })
         }
     }
@@ -90,7 +93,7 @@ class PhotosAlbumViewController: CoreDataCollectionViewController {
 // MARK: - CoreData Operations
 
 extension PhotosAlbumViewController {
-    func getPhotos() {
+    func getPhotos(withPage page: Int = 1) {
         guard let latitude = latitude, let longitude = longitude else {
             print("error")
             return
@@ -98,7 +101,7 @@ extension PhotosAlbumViewController {
         
         view.startLoadingAnimation()
         shouldLockUI(true)
-        FlickrSearchClient.getFlickrImagesFromLocation(latitude: latitude, longitude: longitude) { (photos) in
+        FlickrSearchClient.getFlickrImagesFromLocation(latitude: latitude, longitude: longitude, page: page) { (photos, page, pages)  in
             self.shouldLockUI(false)
             
             if photos.count > 0 {
@@ -109,6 +112,7 @@ extension PhotosAlbumViewController {
                 do {
                     let result = try self.fetchedResultsController!.managedObjectContext.fetch(fetch)
                     let pin = result.first as! LocationPin
+                    self.locationPin = pin
                     for photo in photos {
                         print(photo)
                         pin.addToPhotos(Photo(url: photo.photoURL, imageData: nil, context: self.fetchedResultsController!.managedObjectContext))

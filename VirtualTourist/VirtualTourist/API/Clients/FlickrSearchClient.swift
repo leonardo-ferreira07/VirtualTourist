@@ -10,8 +10,9 @@ import Foundation
 
 struct FlickrSearchClient {
     
-    static func getFlickrImagesFromLocation(latitude: Double, longitude: Double, completion: @escaping (_ photos: [FlickrPhoto]) -> Void) {
+    static func getFlickrImagesFromLocation(latitude: Double, longitude: Double, page: Int = 1, completion: @escaping (_ photos: [FlickrPhoto], _ page: Int?, _ pages: Int?) -> Void) {
         let url = APIClient.buildURL([
+            Constants.FlickrParameterKeys.Page: page,
             Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
             Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey,
             Constants.FlickrParameterKeys.BoundingBox: bboxString(latitude, longitude: longitude),
@@ -23,12 +24,12 @@ struct FlickrSearchClient {
         _ = APIClient.performRequestReturnsData(url, completion: { (data, error) in
             
             guard let data = data else {
-                completion([])
+                completion([], nil, nil)
                 return
             }
             
             if let decoded = try? JSONDecoder().decode(FlickrPhotos.self, from: data) {
-                completion(decoded.main.photos)
+                completion(decoded.main.photos, decoded.main.page, decoded.main.pages)
             }
             
         }) {

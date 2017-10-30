@@ -43,6 +43,7 @@ struct Constants {
         static let NoJSONCallback = "nojsoncallback"
         static let SafeSearch = "safe_search"
         static let BoundingBox = "bbox"
+        static let Page = "page"
     }
     
     // MARK: - Flickr BBox
