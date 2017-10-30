@@ -2,7 +2,7 @@
 //  LocationPin+CoreDataProperties.swift
 //  VirtualTourist
 //
-//  Created by Leonardo Vinicius Kaminski Ferreira on 26/10/17.
+//  Created by Leonardo Vinicius Kaminski Ferreira on 30/10/17.
 //  Copyright © 2017 Leonardo Vinicius Kaminski Ferreira. All rights reserved.
 //
 //
@@ -20,6 +20,7 @@ extension LocationPin {
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
     @NSManaged public var name: String?
+    @NSManaged public var page: Int64
     @NSManaged public var photos: NSSet?
 
 }
