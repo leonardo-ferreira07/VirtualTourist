@@ -59,9 +59,9 @@ class MapViewController: UIViewController {
         }
         
         if MapHelper.didGetFirstCoodinates {
-            let span: MKCoordinateSpan = MKCoordinateSpanMake(MapHelper.latitudeDelta, MapHelper.longitudeDelta)
+            let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: MapHelper.latitudeDelta, longitudeDelta: MapHelper.longitudeDelta)
             let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(MapHelper.latitude, MapHelper.longitude)
-            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+            let region: MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
             self.mapView.setRegion(region, animated: true)
         }
         
@@ -157,9 +157,9 @@ extension MapViewController {
             addNewLocationToDatabase(Double(newCoordinates.latitude), longitude: Double(newCoordinates.longitude))
         }
         
-        if gestureRecognizer.state == UIGestureRecognizerState.began {
+        if gestureRecognizer.state == UIGestureRecognizer.State.began {
             canAddPin = false
-        } else if gestureRecognizer.state == UIGestureRecognizerState.ended {
+        } else if gestureRecognizer.state == UIGestureRecognizer.State.ended {
             canAddPin = true
         }
         

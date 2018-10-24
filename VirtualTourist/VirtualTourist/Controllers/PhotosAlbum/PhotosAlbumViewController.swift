@@ -269,9 +269,9 @@ extension PhotosAlbumViewController {
         if let latitude = latitude, let longitude = longitude {
             let latDelta: CLLocationDegrees = 0.005
             let lonDelta: CLLocationDegrees = 0.005
-            let span: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+            let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
             let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+            let region: MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
             self.mapView.setRegion(region, animated: true)
             let point = MKPointAnnotation()
             point.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
